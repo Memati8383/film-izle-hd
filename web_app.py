@@ -218,7 +218,9 @@ class WebAppHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
-        server_origin = f"http://localhost:{PORT}"
+        # Production'da gercek host'u kullan, localde localhost
+        host = self.headers.get('Host', f'localhost:{PORT}')
+        server_origin = f"http://{host}"
 
         try:
             if parsed.path == '/':
