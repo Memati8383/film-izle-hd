@@ -1,6 +1,12 @@
 # Film İzle HD v2.2
 
-**Full HD 1080p film izleme platformu.** Türkçe dublaj ve altyazılı binlerce filmi reklamsız, donmadan izle.
+[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Deploy](https://img.shields.io/badge/Deploy-Render.com-purple?logo=render&logoColor=white)](https://film-izle-hd.onrender.com)
+
+> **Full HD 1080p film izleme platformu.** Türkçe dublaj ve altyazılı binlerce filmi reklamsız, donmadan izle.
+
+🔗 **Canlı Demo:** [https://film-izle-hd.onrender.com](https://film-izle-hd.onrender.com)
 
 ---
 
@@ -27,51 +33,68 @@
 ## Proje Yapisi
 
 ```
-cheatglboalchenenemi/
-  config.py          # Merkezi yapilandirma (tek kaynak)
-  common.py          # Ortak modul (proxy, guvenlik, cache, logging)
-  extractor.py       # Film arama ve stream extractor
-  web_app.py         # Netflix tarzi web arayuzu
-  player_server.py   # Bagimsiz oynatici sunucusu
-  main.py            # CLI arayuzu
-  start.py           # Baslatma scripti
-  templates/
-    index.html       # Ana sayfa template'i (sadece HTML)
-    player.html      # Oynatici template'i (sadece HTML)
-  static/
-    style.css        # Ana sayfa stilleri
-    app.js           # Ana sayfa JavaScript
-    common.js        # Ortak JS fonksiyonlari (toast, yardimcilar)
-    player.css       # Oynatici stilleri
-    player.js        # Oynatici JavaScript
-  test_common.py     # Unit testler
-  requirements.txt   # Bagimliliklar
+film-izle-hd/
+├── config.py          # Merkezi yapilandirma (tek kaynak)
+├── common.py          # Ortak modul (proxy, guvenlik, cache, logging)
+├── extractor.py       # Film arama ve stream extractor
+├── web_app.py         # Netflix tarzi web arayuzu
+├── player_server.py   # Bagimsiz oynatici sunucusu
+├── main.py            # CLI arayuzu
+├── start.py           # Baslatma scripti
+├── render.yaml        # Render.com deploy ayarlari
+├── requirements.txt   # Bagimliliklar
+├── templates/
+│   ├── index.html     # Ana sayfa template'i
+│   └── player.html    # Oynatici template'i
+└── static/
+    ├── style.css      # Ana sayfa stilleri
+    ├── app.js         # Ana sayfa JavaScript
+    ├── common.js      # Ortak JS fonksiyonlari
+    ├── player.css     # Oynatici stilleri
+    └── player.js      # Oynatici JavaScript
 ```
+
+---
+
+## Canlı Demo
+
+🔗 **https://film-izle-hd.onrender.com**
+
+> ⚠️ Ücretsiz Render planında servis 15 dakika inaktiflik sonrası "sleep" moduna girer. İlk açılışta 30-60 saniye gecikme olabilir.
 
 ---
 
 ## Calistirma
 
-### 1. Bagimliliklarin Yuklenmesi
-```powershell
+### Yerelde (Local)
+
+```bash
+# Bagimliliklarin yuklenmesi
 pip install -r requirements.txt
+
+# Web arayuzu (onerilen)
+python web_app.py
+
+# Terminal / CLI arayuzu
+python main.py
+
+# Testleri calistirma
+python -m pytest test_common.py -v
 ```
 
-### 2. Web Arayuzu (Onerilen)
-```powershell
-py web_app.py
-```
-* Tarayicinizda otomatik olarak `http://localhost:5000` acilacaktir.
+### Render.com'a Deploy
 
-### 3. Terminal / CLI Arayuzu
-```powershell
-py main.py
-```
+1. GitHub repo'yu clone edin veya fork edin
+2. [render.com](https://render.com) hesabiniza giris yapin
+3. **New + → Web Service** secin
+4. `Memati8383/film-izle-hd` repo'sunu secin
+5. Ayarlar:
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `python web_app.py`
+   - **Plan:** Free
+6. **Deploy** butonuna basin
 
-### 4. Testleri Calistirma
-```powershell
-py -m pytest test_common.py -v
-```
+Otomatik olarak `render.yaml` dosyasi kullanilir.
 
 ---
 
