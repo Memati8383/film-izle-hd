@@ -132,7 +132,7 @@
         // Intro transition
         window.addEventListener('DOMContentLoaded', () => {
             renderProfiles();
-            playTaDum();
+            // AudioContext polyfill - tarayici izin vermiyorsa sessiz gec
             setTimeout(() => {
                 skipIntro();
             }, 2200);
