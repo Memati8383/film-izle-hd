@@ -111,17 +111,26 @@
             fullscreen: true,
             fullscreenWeb: true,
             theme: '#a855f7',
-            subtitle: subtitleList.length > 0 ? {
-                url: subtitleList.find(s => s.html.toLowerCase().includes('türk') || s.html.toLowerCase().includes('turk'))?.url || subtitleList[0].url,
-                type: 'vtt',
-                style: {
-                    color: '#ffffff',
-                    fontSize: '26px',
-                    textShadow: '0 2px 4px rgba(0,0,0,0.95), 0 0 3px #000'
-                },
-                encoding: 'utf-8',
-            } : undefined,
         });
+
+        // Altyazi varsa ekle
+        if (subtitleList.length > 0) {
+            try {
+                const turkishSub = subtitleList.find(s => s.html.toLowerCase().includes('türk') || s.html.toLowerCase().includes('turk'));
+                const subUrl = turkishSub?.url || subtitleList[0].url;
+                
+                art.subtitle = {
+                    url: subUrl,
+                    type: 'vtt',
+                    style: {
+                        color: '#ffffff',
+                        fontSize: '26px',
+                        textShadow: '0 2px 4px rgba(0,0,0,0.95), 0 0 3px #000'
+                    },
+                    encoding: 'utf-8',
+                };
+            } catch(e){}
+        }
 
         if (subtitleList.length > 0) {
             try {
