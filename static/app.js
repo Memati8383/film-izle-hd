@@ -239,8 +239,14 @@
                     renderMovieCards('rowPopular', movies.slice(0, 15));
 
                     // Row 2: 2026 movies
-                    const m2026 = movies.filter(m => m.year && m.year.includes('2026'));
-                    renderMovieCards('row2026', m2026.length > 0 ? m2026 : movies.slice(15, 30));
+                    const m2026 = movies.filter(m => {
+                        if (!m.year) return false;
+                        const y = m.year.toString();
+                        return y.includes('2026') || y.includes('(2026)');
+                    });
+                    // Fallback: yeterli film varsa goster, yoksa genel listeyi kullan
+                    const row2026Movies = m2026.length > 0 ? m2026 : movies.slice(0, 15);
+                    renderMovieCards('row2026', row2026Movies);
 
                     // Row 3: Action / Other
                     renderMovieCards('rowAction', movies.slice(10, 25));
