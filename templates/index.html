@@ -114,12 +114,22 @@
                 </a>
                 <ul class="nf-nav-links">
                     <li><a class="active" onclick="showHome()">Ana Sayfa</a></li>
-                    <li><a onclick="showAllMovies()">Tüm Filmler</a></li>
-                    <li><a onclick="doQuickSearch('spiderman')">Spider-Man</a></li>
-                    <li><a onclick="doQuickSearch('batman')">Batman</a></li>
-                    <li><a onclick="doQuickSearch('hızlı')">Hızlı ve Öfkeli</a></li>
-                    <li><a onclick="doQuickSearch('2026')">2026 Yeni Filmler</a></li>
-                    <li><a onclick="doQuickSearch('aksiyon')">Aksiyon</a></li>
+                    <li><a onclick="showAllMovies()">Filmler</a></li>
+                    <li class="nav-dropdown">
+                        <a class="dropdown-toggle">Kategoriler <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a onclick="doQuickSearch('aksiyon')"><i class="fas fa-gun"></i> Aksiyon</a></li>
+                            <li><a onclick="doQuickSearch('komedi')"><i class="fas fa-face-laugh"></i> Komedi</a></li>
+                            <li><a onclick="doQuickSearch('korku')"><i class="fas fa-ghost"></i> Korku</a></li>
+                            <li><a onclick="doQuickSearch('bilim kurgu')"><i class="fas fa-rocket"></i> Bilim Kurgu</a></li>
+                            <li><a onclick="doQuickSearch('macera')"><i class="fas fa-compass"></i> Macera</a></li>
+                            <li><a onclick="doQuickSearch('dram')"><i class="fas fa-masks-theater"></i> Dram</a></li>
+                            <li><a onclick="doQuickSearch('gerilim')"><i class="fas fa-eye"></i> Gerilim</a></li>
+                            <li><a onclick="doQuickSearch('animasyon')"><i class="fas fa-dragon"></i> Animasyon</a></li>
+                        </ul>
+                    </li>
+                    <li><a onclick="doQuickSearch('2026')">2026 Filmleri</a></li>
+                    <li><a onclick="doQuickSearch('2025')">2025 Filmleri</a></li>
                 </ul>
             </div>
 
