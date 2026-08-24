@@ -137,6 +137,22 @@
                 skipIntro();
             }, 2200);
             loadHomeMovies();
+            
+            // Dropdown menu toggle (mobil icin)
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            if (dropdownToggle) {
+                dropdownToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const parent = dropdownToggle.closest('.nav-dropdown');
+                    parent.classList.toggle('open');
+                });
+            }
+            
+            // Diger yere tiklaninca dropdown'u kapat
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+            });
         });
 
         function skipIntro() {
