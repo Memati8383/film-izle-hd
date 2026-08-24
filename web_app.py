@@ -339,7 +339,11 @@ def run_web_app():
     print(f" Tarayici Adresi: http://localhost:{PORT}")
     print("=" * 65 + "\n")
 
-    webbrowser.open(f"http://localhost:{PORT}")
+    # Render.com gibi production ortamlarinda tarayici acma
+    is_production = os.environ.get('RENDER') or os.environ.get('PORT')
+    if not is_production:
+        webbrowser.open(f"http://localhost:{PORT}")
+    
     with ThreadedHTTPServer(("", PORT), WebAppHandler) as httpd:
         try:
             httpd.serve_forever()
