@@ -35,28 +35,15 @@ INDEX_HTML = load_template('index.html')
 
 
 def _background_scrape():
-    """Arka planda tum sayfalari tarar, bitince CACHE'e yazar."""
+    """Arka planda sayfalari tarar, bitince CACHE'e yazar. Hizli baslangic icin sinirli sayfa."""
     movie_cache.scraping = True
     logger.info("Arka plan taramasi baslatildi")
 
-    if not movie_cache.data:
-        all_movies = []
-        seen = set()
-        for q in INITIAL_SEARCH_QUERIES:
-            try:
-                res = search_movies(q)
-                for m in res:
-                    if m['url'] not in seen:
-                        seen.add(m['url'])
-                        all_movies.append(m)
-            except Exception as e:
-                logger.warning("Arama hatasi '%s': %s", q, e)
-        if all_movies:
-            movie_cache.data = all_movies
-
+    # Hizli baslangic: Sadece ilk sayfayi ve populer aramalari tarayalim
     try:
         from extractor import get_movies_from_page, BASE_URL
 
+        # 1. Adim: Ana sayfadan ilk filmleri al (cok hizli)
         first_results, total_pages = get_movies_from_page(f"{BASE_URL}/")
         current = list(movie_cache.data) if movie_cache.data else []
         seen_urls = set(m['url'] for m in current)
@@ -65,29 +52,57 @@ def _background_scrape():
                 seen_urls.add(m['url'])
                 current.append(m)
         movie_cache.data = current
+        logger.info("Ilk sayfa tarandi. Toplam film: %d", len(current))
 
+        # 2. Adim: Sadece ilk 5 sayfayi hizli tara (hizli baslangic icin)
+        max_initial_pages = min(5, total_pages)
+        
         def fetch_page(page_num):
             page_url = f"{BASE_URL}/page/{page_num}/"
             movies, _ = get_movies_from_page(page_url)
             return movies
 
-        batch_size = 10
-        for batch_start in range(2, total_pages + 1, batch_size):
-            batch_end = min(batch_start + batch_size, total_pages + 1)
-            with ThreadPoolExecutor(max_workers=5) as executor:
-                futures = {executor.submit(fetch_page, p): p for p in range(batch_start, batch_end)}
-                for future in as_completed(futures):
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(fetch_page, p): p for p in range(2, max_initial_pages + 1)}
+            for future in as_completed(futures):
+                try:
+                    page_movies = future.result()
+                    current = list(movie_cache.data)
+                    seen_urls = set(m['url'] for m in current)
+                    for m in page_movies:
+                        if m['url'] not in seen_urls:
+                            seen_urls.add(m['url'])
+                            current.append(m)
+                    movie_cache.data = current
+                except Exception as e:
+                    logger.warning("Sayfa tarama hatasi: %s", e)
+
+        logger.info("Hizli tarama tamamlandi. Toplam film: %d", len(movie_cache.data))
+
+        # 3. Adim: Kalan sayfaları arka planda yavas yas tara (opsiyonel)
+        if total_pages > max_initial_pages:
+            def fetch_remaining(start_page, end_page):
+                for p in range(start_page, end_page + 1):
                     try:
-                        page_movies = future.result()
+                        movies = fetch_page(p)
                         current = list(movie_cache.data)
                         seen_urls = set(m['url'] for m in current)
-                        for m in page_movies:
+                        for m in movies:
                             if m['url'] not in seen_urls:
                                 seen_urls.add(m['url'])
                                 current.append(m)
                         movie_cache.data = current
                     except Exception as e:
-                        logger.warning("Sayfa tarama hatasi: %s", e)
+                        logger.warning("Kalan sayfa tarama hatasi: %s", e)
+                    time.sleep(2)  # Yavas tarama
+
+            remaining_thread = threading.Thread(
+                target=fetch_remaining, 
+                args=(max_initial_pages + 1, total_pages),
+                daemon=True
+            )
+            remaining_thread.start()
+
     except Exception as e:
         logger.error("Tarama hatasi: %s", e)
     finally:

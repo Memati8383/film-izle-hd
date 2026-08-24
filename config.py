@@ -31,10 +31,9 @@ HLS_MAX_BUFFER = 60
 HLS_MAX_MAX_BUFFER = 180
 HLS_BACK_BUFFER = 60
 
-# Tarama Ayarlari
+# Tarama Ayarlari (Hizli baslangic icin azaltildi)
 INITIAL_SEARCH_QUERIES = [
-    '2026', '2025', 'spider', 'batman', 'avatar',
-    'hizli', 'canavar', 'korku', 'ajan', 'aksiyon'
+    '2025', '2026'
 ]
 
 # CORS Ayarlari
