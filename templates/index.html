@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film İzle HD - Full HD Film İzle, Türkçe Dublaj & Altyazılı Filmler</title>
+    <meta name="description" content="Full HD 1080p film izle. Türkçe dublaj ve altyazılı binlerce filmi reklamsız, donmadan izle. 2024, 2025, 2026 güncel filmler, aksiyon, komedi, korku filmleri.">
+    <meta name="keywords" content="film izle, full film izle, hd film izle, türkçe dublaj film izle, altyazılı film izle, bedava film izle, 1080p film izle, online film izle, sinema izle, yeni filmler, 2026 filmleri, aksiyon filmi, komedi filmi, korku filmi">
+    <meta name="author" content="Film İzle HD">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="http://localhost:5000/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:5000/">
+    <meta property="og:title" content="Film İzle HD - Full HD Film İzle, Türkçe Dublaj & Altyazılı">
+    <meta property="og:description" content="Full HD 1080p film izle. Türkçe dublaj ve altyazılı binlerce filmi reklamsız, donmadan izle.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Film+%C4%B0zle+HD">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Film İzle HD">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Film İzle HD - Full HD Film İzle">
+    <meta name="twitter:description" content="Full HD 1080p film izle. Türkçe dublaj ve altyazılı binlerce filmi reklamsız izle.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630?text=Film+%C4%B0zle+HD">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#e50914">
+    <meta name="msapplication-TileColor" content="#e50914">
+
+    <!-- Hls.js & Artplayer -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/artplayer@5.1.1/dist/artplayer.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/artplayer@5.1.1/dist/artplayer.js"></script>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/static/style.css?v=2.2">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Film İzle HD",
+        "url": "http://localhost:5000/",
+        "description": "Full HD 1080p film izle. Türkçe dublaj ve altyazılı binlerce filmi reklamsız izle.",
+        "inLanguage": "tr",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "http://localhost:5000/api/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- 1. NETFLIX TA-DUM INTRO ANIMATION -->
+    <div id="introScreen" role="status" aria-label="Yukleniyor animasyonu">
+        <div class="intro-logo">
+            <i class="fas fa-fire-flame-curved"></i> FİLM İZLE HD
+        </div>
+        <div class="intro-skip" onclick="skipIntro()">Geç (Skip)</div>
+    </div>
+
+    <!-- 2. "KİM İZLİYOR?" (WHO'S WATCHING?) SCREEN -->
+    <div id="profileScreen" role="dialog" aria-label="Profil Secimi">
+        <h1 class="profile-title">Kim izliyor?</h1>
+        <div class="profile-list" id="profileListContainer">
+            <!-- Dynamic profiles will be rendered here -->
+        </div>
+        <button class="profile-manage-btn" onclick="openProfileModal()">Yeni Profil Ekle</button>
+    </div>
+
+    <!-- Profile Creator Modal -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-box">
+            <h2 class="profile-modal-title">Yeni Profil Oluştur</h2>
+            
+            <label style="font-size: 13px; color: #aaa; margin-bottom: 8px; display: block;">Profil Avatarı Seçin:</label>
+            <div class="avatar-picker-grid" id="avatarPickerGrid">
+                <div class="avatar-choice avatar-purple selected" data-color="avatar-purple" data-icon="fas fa-fire"><i class="fas fa-fire"></i></div>
+                <div class="avatar-choice avatar-red" data-color="avatar-red" data-icon="fas fa-user-ninja"><i class="fas fa-user-ninja"></i></div>
+                <div class="avatar-choice avatar-blue" data-color="avatar-blue" data-icon="fas fa-ghost"><i class="fas fa-ghost"></i></div>
+                <div class="avatar-choice avatar-green" data-color="avatar-green" data-icon="fas fa-robot"><i class="fas fa-robot"></i></div>
+                <div class="avatar-choice avatar-yellow" data-color="avatar-yellow" data-icon="fas fa-crown"><i class="fas fa-crown"></i></div>
+                <div class="avatar-choice avatar-pink" data-color="avatar-pink" data-icon="fas fa-skull"><i class="fas fa-skull"></i></div>
+                <div class="avatar-choice avatar-cyan" data-color="avatar-cyan" data-icon="fas fa-dragon"><i class="fas fa-dragon"></i></div>
+                <div class="avatar-choice avatar-red" data-color="avatar-red" data-icon="fas fa-gamepad"><i class="fas fa-gamepad"></i></div>
+            </div>
+
+            <label style="font-size: 13px; color: #aaa; margin-bottom: 8px; display: block;">Profil Adı:</label>
+            <input type="text" id="profileNameInput" class="profile-input" placeholder="Adınızı yazın (Örn: Mehmet, Film İzle HD)..." maxlength="20" />
+
+            <div class="profile-modal-btns">
+                <button class="btn-modal-cancel" onclick="closeProfileModal()">İptal</button>
+                <button class="btn-modal-save" onclick="saveNewProfile()">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MAIN NETFLIX APP -->
+    <div id="appContainer">
+        <!-- Navbar -->
+        <nav class="nf-navbar" id="navbar" role="navigation" aria-label="Ana navigasyon">
+            <div class="navbar-left">
+                <a href="/" class="nf-logo">
+                    <i class="fas fa-fire-flame-curved"></i> FİLM İZLE HD
+                </a>
+                <ul class="nf-nav-links">
+                    <li><a class="active" onclick="showHome()">Ana Sayfa</a></li>
+                    <li><a onclick="showAllMovies()">Tüm Filmler</a></li>
+                    <li><a onclick="doQuickSearch('spiderman')">Spider-Man</a></li>
+                    <li><a onclick="doQuickSearch('batman')">Batman</a></li>
+                    <li><a onclick="doQuickSearch('hızlı')">Hızlı ve Öfkeli</a></li>
+                    <li><a onclick="doQuickSearch('2026')">2026 Yeni Filmler</a></li>
+                    <li><a onclick="doQuickSearch('aksiyon')">Aksiyon</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-right">
+                <div class="search-box" id="searchBox">
+                    <button class="search-btn" onclick="toggleSearch()" aria-label="Arama yap" aria-expanded="false"><i class="fas fa-search"></i></button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Film adı yazın (Spiderman, Batman, Avatar)..." autocomplete="off" />
+                </div>
+
+                <div class="nav-profile" onclick="toggleProfileDropdown()" role="button" aria-label="Profil menu" aria-haspopup="true" tabindex="0">
+                    <div class="nav-avatar avatar-purple" id="navAvatar">
+                        <i class="fas fa-fire" id="navAvatarIcon"></i>
+                    </div>
+                    <i class="fas fa-caret-down" style="color: #fff; font-size: 12px;"></i>
+
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-item" onclick="switchProfileScreen()"><i class="fas fa-users"></i> Profil Değiştir</div>
+                        <div class="dropdown-item" onclick="openProfileModal()"><i class="fas fa-plus"></i> Profil Ekle</div>
+                        <div class="dropdown-item" onclick="location.reload()"><i class="fas fa-arrow-rotate-right"></i> Yenile</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Search Results View -->
+        <div id="searchSection">
+            <h2 class="row-title" id="searchResultsTitle">Arama Sonuçları</h2>
+            <div class="loader-box" id="loader">
+                <div class="loader-spinner"><i class="fas fa-circle-notch"></i></div>
+                <div>Filmler aranıyor, akışlar çözümleniyor...</div>
+            </div>
+            <div class="row-slider" id="searchGrid"></div>
+        </div>
+
+        <!-- All Movies View -->
+        <div id="allMoviesSection" style="display:none; padding: 100px 55px 50px 55px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+                <h2 class="row-title" id="allMoviesTitle">Tüm Filmler</h2>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <input type="text" id="allMoviesFilter" placeholder="Film filtrele..." 
+                           style="background:#222; border:1px solid #444; border-radius:6px; padding:10px 16px; color:#fff; font-size:14px; width:280px; outline:none; font-family:inherit;" />
+                    <select id="allMoviesSort" 
+                            style="background:#222; border:1px solid #444; border-radius:6px; padding:10px 12px; color:#fff; font-size:14px; outline:none; font-family:inherit;">
+                        <option value="default">Varsayılan Sıra</option>
+                        <option value="year-desc">Yeni → Eski</option>
+                        <option value="year-asc">Eski → Yeni</option>
+                        <option value="rating-desc">IMDb Yüksek</option>
+                        <option value="rating-asc">IMDb Düşük</option>
+                        <option value="title-asc">A → Z</option>
+                        <option value="title-desc">Z → A</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-slider" id="allMoviesGrid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));"></div>
+            <div id="allMoviesLoadMore" style="text-align:center; padding:30px;">
+                <button onclick="loadMoreAllMovies()" style="background:var(--nf-red); border:none; color:#fff; padding:12px 36px; border-radius:6px; font-size:15px; font-weight:700; cursor:pointer;">
+                    Daha Fazla Film Göster
+                </button>
+                <div id="allMoviesCount" style="color:#808080; margin-top:10px; font-size:13px;"></div>
+            </div>
+        </div>
+
+        <!-- Home Content (Billboard + Rows) -->
+        <div id="homeSection">
+            <!-- Hero Billboard -->
+            <div class="billboard" id="billboard">
+                <div class="billboard-content">
+                    <div class="billboard-badge"><i class="fas fa-fire"></i> GÜNÜN ÖNE ÇIKAN FİLMİ</div>
+                    <h1 class="billboard-title" id="heroTitle">Beast</h1>
+                    <div class="billboard-meta">
+                        <span class="meta-match">%98 Eşleşme</span>
+                        <span class="meta-badge" id="heroYear">2026</span>
+                        <span class="meta-badge">16+</span>
+                        <span class="meta-badge">Ultra HD 4K</span>
+                        <span style="color: #fbbf24;"><i class="fas fa-star"></i> <span id="heroRating">5.8</span></span>
+                    </div>
+                    <p class="billboard-desc" id="heroDesc">
+                        Canavar filmini Film İzle HD üzerinden tamamen reklamsız, 1080p Full HD kalitede, Türkçe Dublaj ve Altyazı desteğiyle hemen izleyin!
+                    </p>
+                    <div class="billboard-buttons">
+                        <button class="btn-play" id="heroPlayBtn" aria-label="Film oynat"><i class="fas fa-play"></i> Oynat</button>
+                        <button class="btn-info" onclick="doQuickSearch('2026')"><i class="fas fa-circle-info"></i> Daha Fazla Bilgi</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movie Rows -->
+            <div class="rows-container">
+                <div class="netflix-row">
+                    <h2 class="row-title">🔥 Film İzle HD'de Popüler (15 Film)</h2>
+                    <div class="row-slider" id="rowPopular"></div>
+                </div>
+                <div class="netflix-row">
+                    <h2 class="row-title">⚡ 2026 Yeni Çıkanlar</h2>
+                    <div class="row-slider" id="row2026"></div>
+                </div>
+                <div class="netflix-row">
+                    <h2 class="row-title">💥 Aksiyon & Efsaneler</h2>
+                    <div class="row-slider" id="rowAction"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. VIDEO MODAL PLAYER -->
+    <div class="modal" id="videoModal" role="dialog" aria-label="Video oynatici" aria-modal="true">
+
+    <!-- SCRAPING BANNER -->
+    <div id="scrapeBanner" role="status" aria-live="polite">
+        <div class="scrape-spinner"><i class="fas fa-circle-notch"></i></div>
+        <span>Tum filmler taraniyor... <span class="scrape-count" id="scrapeCount">0</span> film bulundu</span>
+    </div>
+        <div class="modal-container">
+            <div class="modal-top">
+                <div class="modal-movie-title" id="modalTitle">Film Yükleniyor...</div>
+                <button class="modal-close-btn" onclick="closeModal()" title="Kapat (ESC)"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="player-viewport">
+                <div id="modalArtplayer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Dosyalari -->
+    <script src="/static/common.js?v=2.2"></script>
+    <script src="/static/app.js?v=2.2"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} - Film İzle HD | Full HD Türkçe Dublaj İzle</title>
+    <meta name="description" content="{{TITLE}} filmini Full HD 1080p kalitede, Türkçe dublaj ve altyazı seçenekleriyle reklamsız izle.">
+    <meta name="keywords" content="{{TITLE}}, film izle, full hd film izle, türkçe dublaj, altyazılı film">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#e50914">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="{{TITLE}} - Film İzle HD">
+    <meta property="og:description" content="{{TITLE}} filmini Full HD kalitede reklamsız izle.">
+    <meta property="og:site_name" content="Film İzle HD">
+
+    <!-- Hls.js & Artplayer -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/artplayer@5.1.1/dist/artplayer.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/artplayer@5.1.1/dist/artplayer.js"></script>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Player CSS -->
+    <link rel="stylesheet" href="/static/player.css?v=2.2">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-badge"><i class="fas fa-fire-flame-curved"></i></div>
+            <div class="title-group">
+                <h1>{{TITLE}}</h1>
+                <p>{{ORIG_TITLE}} &bull; Film İzle HD</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-action" onclick="toggleCinema()"><i class="fas fa-lightbulb"></i> Sinema Işıkları</button>
+            <button class="btn-action" onclick="copyStreamUrl()"><i class="fas fa-link"></i> M3U8 Kopyala</button>
+        </div>
+    </div>
+
+    <div class="player-wrapper" id="playerWrapper" role="region" aria-label="Video oynatici">
+        <div id="artplayer"></div>
+    </div>
+
+    <div class="info-bar">
+        <div class="info-tags">
+            <span class="tag"><i class="fas fa-shield-halved"></i> Reklamsız Yayın</span>
+            <span class="tag"><i class="fas fa-bolt"></i> 1080p Full HD</span>
+            <span class="tag"><i class="fas fa-language"></i> Dublaj / Altyazı Desteği</span>
+        </div>
+        <div>
+            Kısayollar: <b>Space</b> (Oynat/Durdur), <b>F</b> (Tam Ekran), <b>M</b> (Sessiz), <b>Sol/Sağ</b> (İleri/Geri)
+        </div>
+    </div>
+
+    <!-- JS Dosyalari -->
+    <script src="/static/common.js?v=2.2"></script>
+    <script>
+        const streamUrl = {{STREAM_URL}};
+        const tracks = {{TRACKS}};
+    </script>
+    <script src="/static/player.js?v=2.2"></script>
+</body>
+</html>
