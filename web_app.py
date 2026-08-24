@@ -218,9 +218,12 @@ class WebAppHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
-        # Production'da gercek host'u kullan, localde localhost
+        # Production'da gercek host ve protocol'u kullan
         host = self.headers.get('Host', f'localhost:{PORT}')
-        server_origin = f"http://{host}"
+        # HTTPS mi kontrol et (Render, Cloudflare vs.)
+        is_secure = self.headers.get('X-Forwarded-Proto') == 'https' or self.connection.getpeername()[1] == 443
+        protocol = 'https' if is_secure else 'http'
+        server_origin = f"{protocol}://{host}"
 
         try:
             if parsed.path == '/':
