@@ -236,6 +236,13 @@ class WebAppHandler(http.server.BaseHTTPRequestHandler):
             elif parsed.path.startswith('/static/'):
                 self._serve_static(parsed.path)
 
+            elif parsed.path == '/favicon.ico':
+                # Favicon - bos ico dondur (404 onlemek icin)
+                self.send_response(204)
+                self.send_header('Content-Type', 'image/x-icon')
+                self.send_header('Cache-Control', 'public, max-age=86400')
+                self.end_headers()
+
             elif parsed.path == '/robots.txt':
                 robots_path = os.path.join(STATIC_DIR, 'robots.txt')
                 try:
